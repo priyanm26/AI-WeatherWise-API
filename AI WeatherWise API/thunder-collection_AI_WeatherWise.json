@@ -1,0 +1,160 @@
+{
+  "clientName": "Thunder Client",
+  "collectionName": "AI WeatherWise API (Complete Suite)",
+  "collectionId": "ai-weatherwise-collection-2026",
+  "dateExported": "2026-09-28T08:29:00.000Z",
+  "version": "1.0",
+  "folders": [
+    {
+      "_id": "folder_system",
+      "name": "1. System Health",
+      "containerId": ""
+    },
+    {
+      "_id": "folder_auth",
+      "name": "2. Authentication",
+      "containerId": ""
+    },
+    {
+      "_id": "folder_weather",
+      "name": "3. Weather & AI Insights",
+      "containerId": ""
+    },
+    {
+      "_id": "folder_locations",
+      "name": "4. Favorite Locations (Protected)",
+      "containerId": ""
+    },
+    {
+      "_id": "folder_admin",
+      "name": "5. Admin Management (Admin Protected)",
+      "containerId": ""
+    }
+  ],
+  "requests": [
+    {
+      "_id": "req_health",
+      "colId": "ai-weatherwise-collection-2026",
+      "containerId": "folder_system",
+      "name": "01. Health Check",
+      "url": "http://localhost:5000/api/health",
+      "method": "GET"
+    },
+    {
+      "_id": "req_register",
+      "colId": "ai-weatherwise-collection-2026",
+      "containerId": "folder_auth",
+      "name": "02. Register User",
+      "url": "http://localhost:5000/api/auth/register",
+      "method": "POST",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"name\": \"Priyan User\",\n  \"email\": \"priyan2@example.com\",\n  \"password\": \"Password123!\"\n}"
+      }
+    },
+    {
+      "_id": "req_login_user",
+      "colId": "ai-weatherwise-collection-2026",
+      "containerId": "folder_auth",
+      "name": "03. Login User",
+      "url": "http://localhost:5000/api/auth/login",
+      "method": "POST",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"priyan@example.com\",\n  \"password\": \"password123\"\n}"
+      }
+    },
+    {
+      "_id": "req_login_admin",
+      "colId": "ai-weatherwise-collection-2026",
+      "containerId": "folder_auth",
+      "name": "04. Login Admin",
+      "url": "http://localhost:5000/api/auth/login",
+      "method": "POST",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"priyan@weatherwise.com\",\n  \"password\": \"priyan262007@!\"\n}"
+      }
+    },
+    {
+      "_id": "req_weather_live",
+      "colId": "ai-weatherwise-collection-2026",
+      "containerId": "folder_weather",
+      "name": "05. Live Weather (City)",
+      "url": "http://localhost:5000/api/weather/Chennai",
+      "method": "GET"
+    },
+    {
+      "_id": "req_weather_insights",
+      "colId": "ai-weatherwise-collection-2026",
+      "containerId": "folder_weather",
+      "name": "06. Weather + AI Insights",
+      "url": "http://localhost:5000/api/weather/Chennai/insights",
+      "method": "GET"
+    },
+    {
+      "_id": "req_create_location",
+      "colId": "ai-weatherwise-collection-2026",
+      "containerId": "folder_locations",
+      "name": "07. Create Favorite Location",
+      "url": "http://localhost:5000/api/locations",
+      "method": "POST",
+      "auth": {
+        "type": "bearer",
+        "bearer": "{{token}}"
+      },
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"city\": \"Chennai\",\n  \"country\": \"India\",\n  \"notes\": \"Hometown location\"\n}"
+      }
+    },
+    {
+      "_id": "req_get_locations",
+      "colId": "ai-weatherwise-collection-2026",
+      "containerId": "folder_locations",
+      "name": "08. Get All Saved Locations",
+      "url": "http://localhost:5000/api/locations",
+      "method": "GET",
+      "auth": {
+        "type": "bearer",
+        "bearer": "{{token}}"
+      }
+    },
+    {
+      "_id": "req_delete_location",
+      "colId": "ai-weatherwise-collection-2026",
+      "containerId": "folder_locations",
+      "name": "09. Delete Favorite Location",
+      "url": "http://localhost:5000/api/locations/{location_id}",
+      "method": "DELETE",
+      "auth": {
+        "type": "bearer",
+        "bearer": "{{token}}"
+      }
+    },
+    {
+      "_id": "req_admin_users",
+      "colId": "ai-weatherwise-collection-2026",
+      "containerId": "folder_admin",
+      "name": "10. Get All Users (Admin)",
+      "url": "http://localhost:5000/api/admin/users",
+      "method": "GET",
+      "auth": {
+        "type": "bearer",
+        "bearer": "{{adminToken}}"
+      }
+    },
+    {
+      "_id": "req_delete_user",
+      "colId": "ai-weatherwise-collection-2026",
+      "containerId": "folder_admin",
+      "name": "11. Delete User Account (Admin)",
+      "url": "http://localhost:5000/api/admin/users/{user_id}",
+      "method": "DELETE",
+      "auth": {
+        "type": "bearer",
+        "bearer": "{{adminToken}}"
+      }
+    }
+  ]
+}

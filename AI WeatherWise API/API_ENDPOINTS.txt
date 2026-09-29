@@ -1,0 +1,176 @@
+========================================
+AI WEATHERWISE - API ENDPOINTS
+========================================
+Base URL: http://localhost:5000
+
+--- 1. SYSTEM HEALTH ---
+Endpoint: System Health Check
+Method: GET
+Full URL: http://localhost:5000/api/health
+Headers: None
+Body: None
+Purpose: Check API server and database connection status.
+
+--- 2. AUTHENTICATION ---
+Endpoint: Register User
+Method: POST
+Full URL: http://localhost:5000/api/auth/register
+Headers: Content-Type: application/json
+Body:
+{
+  "name": "Alex Reader",
+  "email": "alex@example.com",
+  "password": "Password123!"
+}
+Purpose: Register a new user and receive JWT token.
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhYmE4YTgyMGMzZjE0MGY0ZDZmMzY3ZCIsInJvbGUiOiJyZWFkZXIiLCJpYXQiOjE3OTA2MTAwNTAsImV4cCI6MTc5MzIwMjA1MH0.UpgfYc8OpxgStmHtZRvq_KCuXCy9LinrtBcPqCbRXjU
+Method: POST
+Full URL: http://localhost:5000/api/auth/login
+Headers: Content-Type: application/json
+Body:
+{
+  "email": "alex@example.com",
+  "password": "Password123!"
+}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhYmE4YTgyMGMzZjE0MGY0ZDZmMzY3ZCIsInJvbGUiOiJyZWFkZXIiLCJpYXQiOjE3OTA2MTAxMjQsImV4cCI6MTc5MzIwMjEyNH0.m9HdlxJmhhBGC5DOKaPOpH7MIh17N8zOqSbzdA7390Q
+Purpose: Authenticate user and receive JWT Bearer token.
+
+--- 3. USER PROFILE ---
+Endpoint: Get Profile
+Method: GET
+Full URL: http://localhost:5000/api/users/me
+Headers: Authorization: Bearer <TOKEN>
+Body: None
+Purpose: Fetch profile of the logged-in user.
+6aba8a820c3f140f4d6f367d
+Endpoint: Update Profile
+Method: PUT
+Full URL: http://localhost:5000/api/users/me
+Headers: 
+  Content-Type: application/json
+  Authorization: Bearer <TOKEN>
+Body:
+{
+  "name": "Alex Updated",
+  "password": "NewPassword123!"
+}
+Purpose: Update name, email, or password of logged-in user.
+
+--- 4. FAVORITE LOCATIONS ---
+Endpoint: Add Favorite Location
+Method: POST
+Full URL: http://localhost:5000/api/locations
+Headers: 
+  Content-Type: application/json
+  Authorization: Bearer <TOKEN>
+Body:
+{
+  "city": "Chennai",
+  "country": "India",
+  "notes": "Hometown"
+}
+Purpose: Save a new favorite city.
+
+Endpoint: Get Saved Locations
+Method: GET
+Full URL: http://localhost:5000/api/locations
+Headers: Authorization: Bearer <TOKEN>
+Body: None
+Purpose: List all favorite locations of logged-in user.
+
+Endpoint: Get Location By ID
+Method: GET
+Full URL: http://localhost:5000/api/locations/<LOCATION_ID>
+Headers: Authorization: Bearer <TOKEN>
+Body: None
+Purpose: Get details of a single saved location.
+
+Endpoint: Update Location
+Method: PUT
+Full URL: http://localhost:5000/api/locations/<LOCATION_ID>
+Headers: 
+  Content-Type: application/json
+  Authorization: Bearer <TOKEN>
+Body:
+{
+  "city": "Chennai",
+  "country": "India",
+  "notes": "Updated note"
+}
+Purpose: Update city, country, or notes for a saved location.
+
+Endpoint: Delete Location
+Method: DELETE
+Full URL: http://localhost:5000/api/locations/<LOCATION_ID>
+Headers: Authorization: Bearer <TOKEN>
+Body: None
+Purpose: Remove a location from saved list.
+
+--- 5. WEATHER & AI INSIGHTS ---
+Endpoint: Get Live Weather
+Method: GET
+Full URL: http://localhost:5000/api/weather/:city
+Headers: None
+Body: None
+Purpose: Fetch real-time (or fallback) weather for a city.
+
+Endpoint: Get Weather + AI Insights
+Method: GET
+Full URL: http://localhost:5000/api/weather/:city/insights
+Headers: None
+Body: None
+Purpose: Fetch live weather combined with Gemini AI summary and advice.
+
+Endpoint: AI Weather Summary
+Method: POST
+Full URL: http://localhost:5000/api/ai/summary
+Headers: Content-Type: application/json
+Body:
+{
+  "city": "Tokyo"
+}
+Purpose: Generate AI natural-language weather summary.
+
+Endpoint: AI Recommendations
+Method: POST
+Full URL: http://localhost:5000/api/ai/recommendation
+Headers: Content-Type: application/json
+Body:
+{
+  "city": "London"
+}
+Purpose: Generate AI activity, clothing, and health advice.
+
+--- 6. ADMIN MANAGEMENT ---
+Endpoint: Get All Users
+Method: GET
+Full URL: http://localhost:5000/api/admin/users
+Headers: Authorization: Bearer <ADMIN_TOKEN>
+Body: None
+Purpose: List all registered users (Admin only).
+
+Endpoint: Get User By ID
+Method: GET
+Full URL: http://localhost:5000/api/admin/users/<USER_ID>
+Headers: Authorization: Bearer <ADMIN_TOKEN>
+Body: None
+Purpose: Retrieve user profile details by ID (Admin only).
+
+Endpoint: Update User Status
+Method: PATCH
+Full URL: http://localhost:5000/api/admin/users/<USER_ID>/status
+Headers: 
+  Content-Type: application/json
+  Authorization: Bearer <ADMIN_TOKEN>
+Body:
+{
+  "isActive": false
+}
+Purpose: Suspend or activate a user account (Admin only).
+
+Endpoint: Delete User
+Method: DELETE
+Full URL: http://localhost:5000/api/admin/users/<USER_ID>
+Headers: Authorization: Bearer <ADMIN_TOKEN>
+Body: None
+Purpose: Permanently delete a user account (Admin only).
